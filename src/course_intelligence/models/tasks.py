@@ -1,6 +1,6 @@
 """Shared task, role, and message contracts."""
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import StrEnum
 
 from pydantic import Field
@@ -47,4 +47,4 @@ class AgentMessage(StrictModel):
     sender_role_id: str = Field(min_length=1)
     recipient_role_id: str = Field(min_length=1)
     content: str = Field(min_length=1)
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    created_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
