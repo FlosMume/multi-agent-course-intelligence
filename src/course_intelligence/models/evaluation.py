@@ -1,6 +1,6 @@
 """Comparable tracing and rubric records."""
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Literal
 
 from pydantic import Field, model_validator
@@ -26,7 +26,7 @@ class RunTrace(StrictModel):
     framework: Literal["native", "langchain", "langgraph", "crewai", "autogen"]
     model_provider: str = Field(min_length=1)
     model_name: str = Field(min_length=1)
-    started_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    started_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
     completed_at: datetime | None = None
     steps: list[TraceStep] = Field(default_factory=list)
     model_calls: int = Field(default=0, ge=0)
